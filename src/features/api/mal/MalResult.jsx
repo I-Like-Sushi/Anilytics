@@ -3,7 +3,7 @@ import{ useState } from 'react';
 function MALAnimeSearch () {
     const [query, setQuery] = useState('');
     const [anime, setAnime] = useState(null);
-    const CLIENT_ID = '733484f0643c2a1324bd67acc8d28305';
+    const CLIENT_ID = '';
 
     const fetchAnime = async () => {
         if (!query) return;
