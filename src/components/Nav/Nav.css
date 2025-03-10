@@ -1,0 +1,124 @@
+/* General Styles */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    padding: 20px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #0070f3;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu li {
+    margin-left: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #0070f3;
+}
+
+/* Log In Button */
+.log-in-button {
+    padding: 10px 20px;
+    background-color: #0070f3;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.log-in-button Link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.log-in-button:hover {
+    background-color: #005bb5;
+}
+
+/* Mobile Navigation */
+.menu-toggle {
+    display: none; /* Show only on mobile */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #fff;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .nav-menu.active {
+        max-height: 300px;
+        transition: max-height 0.5s ease-in;
+    }
+
+    .nav-menu li {
+        margin: 15px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger {
+        width: 30px;
+        height: 3px;
+        background-color: #333;
+        position: relative;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+        content: '';
+        width: 30px;
+        height: 3px;
+        background-color: #333;
+        position: absolute;
+        left: 0;
+    }
+
+    .hamburger::before {
+        top: -8px;
+    }
+
+    .hamburger::after {
+        top: 8px;
+    }
+}
