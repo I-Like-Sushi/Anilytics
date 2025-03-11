@@ -4,27 +4,61 @@
     box-sizing: border-box;
 }
 
+/* Main container for the detailed view */
 .results-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Card style for the anime details */
 .result-card {
-    background: #f4f4f9;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 10px;
-    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Title styling */
+.result-card h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Paragraph styling */
+.result-card p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Anime image styling */
 .result-image {
-    border-radius: 4px;
     max-width: 100%;
     height: auto;
-    margin-top: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 600px) {
+    .results-container {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .result-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .result-card p {
+        font-size: 0.9rem;
+    }
 }
