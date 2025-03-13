@@ -3,14 +3,16 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter as Router } from 'react-router-dom';
-import { UserContextProvider } from './UserContext';
+import { MalJikanContextProvider } from './MalJikanContext.jsx';
+import { ExtraAnimeContextProvider } from './ExtraAnimeContext.jsx';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <UserContextProvider>
-            <Router>
-                <App />
-            </Router>
-        </UserContextProvider>
+        <MalJikanContextProvider>
+            <ExtraAnimeContextProvider/>
+                <Router>
+                    <App />
+                </Router>
+        </MalJikanContextProvider>
     </StrictMode>
 );

@@ -1,10 +1,11 @@
+// SearchBar.jsx
 import { useContext, useRef, useState } from 'react';
-import { UserContext } from '../../../app/UserContext.jsx';
+import { MalJikanContext } from '../../../app/MalJikanContext.jsx';
 import './SearchBar2.css';
 import { Link } from 'react-router-dom';
 
 function SearchBar() {
-    const { data, loading, error, fetchData } = useContext(UserContext);
+    const { data, loading, error, fetchData } = useContext(MalJikanContext);
     const [input, setInput] = useState("");
     const debounceTimeout = useRef(null);
 
@@ -22,6 +23,8 @@ function SearchBar() {
             }, 500); // 500ms debounce
         }
     };
+
+
 
     return (
         <div className="search-container">
