@@ -1,10 +1,10 @@
 import { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const UserContext = createContext();
+export const MalJikanContext = createContext();
 
-export function UserContextProvider({ children }) {
-    const [data, setData] = useState([]);
+export function MalJikanContextProvider({ children }) {
+    const [data, setData] = useState([]); // search results from MalJikan
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -17,21 +17,23 @@ export function UserContextProvider({ children }) {
                 const json = await response.json();
                 setData(json.data || []);
             } else {
-                setError("Error: Unable to fetch data.");
+                setError("Error: Unable to fetch data from MalJikan API.");
             }
         } catch (err) {
-            console.error("Error fetching data:", err); // Use the variable here
-            setError(`Error: ${err.message || "Unable to fetch data."}`);
+            console.error("MalJikan API error:", err);
+            setError(`MalJikan API Error: ${err.message || "Unable to fetch data."}`);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <UserContext.Provider value={{ data, loading, error, fetchData }}>
+        <MalJikanContext.Provider value={{ data, loading, error, fetchData }}>
             {children}
-        </UserContext.Provider>
+        </MalJikanContext.Provider>
     );
 }
 
-UserContextProvider.propTypes = {
+MalJikanContextProvider.propTypes = {
     children: PropTypes.node.isRequired,
 };
