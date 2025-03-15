@@ -12,6 +12,7 @@ export function MalJikanContextProvider({ children }) {
         setLoading(true);
         setError(null);
         try {
+            console.log("Maljikan fetch by query");
             const response = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}`);
             if (response.ok) {
                 const json = await response.json();

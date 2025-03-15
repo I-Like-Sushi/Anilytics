@@ -54,7 +54,7 @@
     box-shadow: 0 0 8px #ddd;
     border-radius: 10px;
     margin-top: 1rem;
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: scroll;
 }
 
@@ -64,6 +64,12 @@
     border-bottom: 1px solid #ccc;
     display: flex;
     align-items: center;
+    min-height: 180px;
+}
+
+.result-item a{
+    box-shadow: none;
+    width: 100%;
 }
 
 .result-item h6 {
@@ -74,10 +80,13 @@
 
 .result-item img {
     border-radius: 4px;
+    width: 110px;
+    float: left;
+    margin-right: 10px;
 }
 
 .result-item:hover {
-    background-color: #357ae8;
+    background-color: #d1e2ff;
 }
 
 .anime-release-date {

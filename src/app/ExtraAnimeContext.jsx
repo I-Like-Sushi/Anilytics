@@ -57,8 +57,6 @@ export function ExtraAnimeContextProvider({ children }) {
         }
     };
 
-
-
     // Function to fetch data from the Kitsu API (search results)
     const fetchKitsuData = async (query) => {
         console.log('CHECKING 22222222222');

@@ -7,12 +7,11 @@ import { MalJikanContextProvider } from './MalJikanContext.jsx';
 import { ExtraAnimeContextProvider } from './ExtraAnimeContext.jsx';
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
+
         <MalJikanContextProvider>
             <ExtraAnimeContextProvider/>
                 <Router>
                     <App />
                 </Router>
         </MalJikanContextProvider>
-    </StrictMode>
 );

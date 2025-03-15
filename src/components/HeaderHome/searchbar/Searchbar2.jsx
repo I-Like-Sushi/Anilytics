@@ -24,8 +24,6 @@ function SearchBar() {
         }
     };
 
-
-
     return (
         <div className="search-container">
             <div className="search-box">
@@ -51,25 +49,25 @@ function SearchBar() {
                 {data.length > 0 ? (
                     data.map((anime) => (
                         <div key={anime.mal_id} className="result-item">
-                            <Link to={`/results/${anime.mal_id}`}>
-                                <h6>{anime.title}</h6>
-                                {anime.type === "TV" ? (
-                                    <p className="anime-release-date">
-                                        Anime aired from: {anime.aired?.prop?.from?.year || "N/A"} to {anime.aired?.prop?.to?.year || "N/A"}
-                                    </p>
-                                ) : (
-                                    <p className="anime-release-date">
-                                        Anime aired from: {anime.aired?.prop?.from?.year || "N/A"}
-                                    </p>
-                                )}
+                            <Link to={`/results2/${anime.mal_id}`}>
                                 {anime.images?.jpg?.image_url && (
                                     <img
                                         src={anime.images.jpg.image_url}
                                         alt={`${anime.title} Poster`}
-                                        width="150"
-                                        style={{ borderRadius: '4px' }}
                                     />
                                 )}
+                                <div className="animeDetail">
+                                    <h6>{anime.title}</h6>
+                                    {anime.type === "TV" ? (
+                                        <p className="anime-release-date">
+                                            Anime aired from: {anime.aired?.prop?.from?.year || "N/A"} to {anime.aired?.prop?.to?.year || "N/A"}
+                                        </p>
+                                    ) : (
+                                        <p className="anime-release-date">
+                                            Anime aired from: {anime.aired?.prop?.from?.year || "N/A"}
+                                        </p>
+                                    )}
+                                </div>
                             </Link>
                         </div>
                     ))
