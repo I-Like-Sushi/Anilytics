@@ -1,4 +1,3 @@
-// ExtraAnimeContext.jsx
 import { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,22 +14,23 @@ export function ExtraAnimeContextProvider({ children }) {
     const fetchAnilistData = async (idMal) => {
         setLoading(true);
         const graphqlQuery = `
-            query {
-              Media (idMal: 1, type: ANIME) {
+        query ($idMal: Int) {
+            Media(idMal: $idMal, type: ANIME) {
                 id
+                idMal
                 title {
-                  romaji
-                  english
-                  native
+                    romaji
+                    english
+                    native
                 }
                 description
                 episodes
                 coverImage {
-                  large
+                    large
                 }
-              }
             }
-            `;
+        }
+    `;
         const variables = { idMal: Number(idMal) };
         try {
             const response = await fetch("https://graphql.anilist.co", {
@@ -58,8 +58,10 @@ export function ExtraAnimeContextProvider({ children }) {
     };
 
 
+
     // Function to fetch data from the Kitsu API (search results)
     const fetchKitsuData = async (query) => {
+        console.log('CHECKING 22222222222');
         setLoading(true);
         setError(null);
         try {

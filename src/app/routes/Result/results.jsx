@@ -12,8 +12,7 @@ function Results() {
     // Use MalJikan context for search results
     const { data: malData } = useContext(MalJikanContext);
 
-    // Use ExtraAnimeContext for Kitsu data and others.
-    // Notice we are not destructuring fetchAnilistData here to avoid redeclaration.
+    // Use ExtraAnimeContext for Kitsu and other data.
     const extraContext = useContext(ExtraAnimeContext) || {
         anilistData: [],
         kitsuData: [],
@@ -21,18 +20,22 @@ function Results() {
         loading: false,
         error: null,
     };
+
+    console.log("checkinggggggggggggg");
     const {
-        anilistData,
         kitsuData,
         fetchKitsuData,
         loading: extraLoading,
         error: extraError,
     } = extraContext;
 
-    // Local state for our MalJikan anime details
+    // Local state for MalJikan anime details
     const [anime, setAnime] = useState(null);
     const [localLoading, setLocalLoading] = useState(true);
     const [localError, setLocalError] = useState(null);
+
+    // Local state for Anilist data (fetched by MAL ID)
+    const [localAnilistData, setLocalAnilistData] = useState(null);
 
     // Local function to fetch Anilist data using GraphQL by MAL ID.
     const fetchAnilistDataLocal = useCallback(async (malId) => {
@@ -47,29 +50,29 @@ function Results() {
                 },
                 body: JSON.stringify({
                     query: `
-            query ($idMal: Int) {
-              Media(idMal: $idMal, type: ANIME) {
-                id
-                title {
-                  romaji
-                  english
-                  native
-                }
-                description
-                episodes
-                coverImage {
-                  large
-                }
-              }
-            }
-          `,
+                    query ($idMal: Int) {
+                        Media(idMal: $idMal, type: ANIME) {
+                            id
+                            idMal
+                            title {
+                                romaji
+                                english
+                                native
+                            }
+                            description
+                            episodes
+                            coverImage {
+                                large
+                            }
+                        }
+                    }`,
                     variables: { idMal: Number(malId) },
                 }),
             });
             const json = await response.json();
             if (json.data && json.data.Media) {
                 console.log("Fetched from Anilist:", json.data.Media);
-                // Optionally, you could update some state or context for Anilist data here.
+                setLocalAnilistData(json.data.Media); // Store the object directly
             } else {
                 console.error("No data found for MAL ID", malId);
             }
@@ -97,9 +100,11 @@ function Results() {
                     console.log("Fetching Anilist data for MAL ID:", json.data.mal_id);
                     fetchAnilistDataLocal(json.data.mal_id);
                 }
+
                 // For Kitsu, continue using title search.
                 if (json.data.title) {
-                    fetchKitsuData(json.data.title);
+                    console.log("Fetching Kitsu data for title:", json.data.title);
+                    fetchKitsuData(json.data.title);  // Use the Japanese title for Kitsu search
                 }
             } else {
                 new Error("Failed to fetch anime details from MalJikan API.");
@@ -117,25 +122,49 @@ function Results() {
         if (anime) return;
 
         // Attempt to find the anime from the MalJikan search results
-        const foundAnime = malData.find(
+        const foundAnime = malData && malData.find(
             (item) => item.mal_id && item.mal_id.toString() === id
         );
 
         if (foundAnime) {
+            // Set anime from MalJikan data
             setAnime(foundAnime);
             console.log("Using MalJikan search result. Fetching Anilist data for MAL ID:", foundAnime.mal_id);
+
+            // Fetch Anilist data if the MAL ID exists
             if (foundAnime.mal_id) {
                 fetchAnilistDataLocal(foundAnime.mal_id);
             }
+
+            // Fetch Kitsu data using the MalJikan title
             if (foundAnime.title) {
-                fetchKitsuData(foundAnime.title);
+                console.log("Fetching Kitsu data for the title:", foundAnime.title);
+                fetchKitsuData(foundAnime.title); // This updates kitsuData state asynchronously
             }
+
             setLocalLoading(false);
         } else {
-            // Fallback: fetch details directly from MalJikan
+            // If no matching anime in malData, fetch from MalJikan directly
+            console.log("Fetching full anime details from MalJikan API...");
             fetchAnimeDetails();
         }
     }, [id, malData, anime, fetchAnimeDetails, fetchAnilistDataLocal, fetchKitsuData]);
+
+// Use this effect to track updates to kitsuData and debug its content
+    useEffect(() => {
+        if (kitsuData && kitsuData.length > 0) {
+            console.log("Kitsu Data updated:");
+            kitsuData.forEach((item, index) => {
+                console.log(`Kitsu Item ${index + 1}:`);
+                console.log("titles.en:", item.attributes?.titles?.en);
+                console.log("canonicalTitle:", item.attributes?.canonicalTitle);
+                console.log("titles.en_jp:", item.attributes?.titles?.en_jp);
+            });
+        } else {
+            console.log("Kitsu Data is empty or null.");
+        }
+    }, [kitsuData]);
+
 
     // Combine loading and error states.
     const isLoading = localLoading || extraLoading;
@@ -169,8 +198,10 @@ function Results() {
 
     // Debug logs
     console.log("MalJikan Anime:", anime);
-    console.log("Anilist Data:", anilistData);
+    console.log("Local Anilist Data:", localAnilistData);
     console.log("Kitsu Data:", kitsuData);
+
+    console.log()
 
     return (
         <>
@@ -194,25 +225,31 @@ function Results() {
                 </div>
 
                 <div className="extra-results">
-                    {anilistData && anilistData.length > 0 ? (
+                    {localAnilistData ? (
                         <div>
                             <h3>Anilist Results</h3>
-                            {anilistData.map((item, index) => (
-                                <div key={item.id || `anilist-${index}`} className="extra-result-item">
-                                    <p>{item.title.romaji || item.title.english || "No Title"}</p>
-                                </div>
-                            ))}
+                            <div className="extra-result-item">
+                                <p>
+                                    {localAnilistData.title.romaji ||
+                                        localAnilistData.title.english ||
+                                        "No Title"}
+                                </p>
+                                <p>
+                                    MAL ID: {localAnilistData.idMal}
+                                </p>
+                            </div>
                         </div>
                     ) : (
                         <p>No results found on Anilist.</p>
                     )}
 
-                    {kitsuData && kitsuData.length > 0 ? (
+                    {/* Kitsu Results Section */}
+                    {kitsuData.length > 0 ? (
                         <div>
                             <h3>Kitsu Results</h3>
                             {kitsuData.map((item, index) => (
                                 <div key={item.id || `kitsu-${index}`} className="extra-result-item">
-                                    <p>{item.attributes?.canonicalTitle || "No Title"}</p>
+                                    <p>{item.attributes?.titles?.ja_jp || "No Title"}</p>
                                 </div>
                             ))}
                         </div>
