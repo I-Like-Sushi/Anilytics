@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Nav from "../../../components/Nav/Nav.jsx";
 import Footer from "../../../components/Footer/Footer.jsx";
 import "./results.css";
+import error from "eslint-plugin-react/lib/util/error.js";
 
 
 function Results2() {
@@ -44,9 +45,14 @@ function Results2() {
                 idMal
                 averageScore
                 title {
-                  romaji
-                  english
-                  native
+                    romaji
+                    english
+                    native
+                }
+                startDate {
+                    day
+                    month
+                    year
                 }
                 description
                 episodes
@@ -132,6 +138,12 @@ function Results2() {
         );
     }
 
+
+    const maljikanDataYearRelease = `${maljikanData.aired?.prop?.from?.year}-${String(maljikanData.aired?.prop?.from?.month).padStart(2, '0')}-${String(maljikanData.aired?.prop?.from?.day).padStart(2, '0')}`
+    const anilistDataYearRelease = `${anilistData.Media.startDate.year}-${String(anilistData.Media.startDate.month).padStart(2, '0')}-${String(anilistData.Media.startDate.day).padStart(2, '0')}`
+    console.log("anilistDataYearRelease: ", anilistDataYearRelease);
+
+
     return (
         <>
             <Nav />
@@ -200,15 +212,20 @@ function Results2() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {kitsuData.map((item, index) => (
-                                        <tr key={item.id || `kitsu-${index}`} className="extra-result-item">
-                                            <td>{index}</td>
-                                            <td>
-                                                <p>Title: {item.attributes?.titles?.ja_jp || "No Title"}</p>
-                                                <p>Rating: {item.attributes?.averageRating || "No rating"}</p>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {kitsuData
+                                        .filter((item) => maljikanDataYearRelease === item.attributes?.startDate)
+                                        .map((item, index) => (
+                                            <tr key={item.id || `kitsu-${index}`} className="extra-result-item">
+                                                <td>{index}</td>
+                                                <td>
+                                                    <p>Title: {item.attributes?.titles?.ja_jp || "No Title"}</p>
+                                                    <p>Rating: {item.attributes?.averageRating || "No rating"}</p>
+                                                    <p>Test: {item.attributes?.startDate}</p>
+                                                    <p>Test2: {maljikanDataYearRelease}</p>
+                                                    <p>Test3: {} </p>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>
