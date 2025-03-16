@@ -60,6 +60,16 @@ function Results2() {
                 coverImage {
                   large
                 }
+                stats {
+                    scoreDistribution {
+                        amount
+                        score
+                        }
+                    statusDistribution {
+                        amount
+                        status
+                        }
+                }
               }
             }`,
                     variables: { idMal: Number(id) },
@@ -141,7 +151,8 @@ function Results2() {
 
     const maljikanDataYearRelease = `${maljikanData.aired?.prop?.from?.year}-${String(maljikanData.aired?.prop?.from?.month).padStart(2, '0')}-${String(maljikanData.aired?.prop?.from?.day).padStart(2, '0')}`
     const anilistDataYearRelease = `${anilistData.Media.startDate.year}-${String(anilistData.Media.startDate.month).padStart(2, '0')}-${String(anilistData.Media.startDate.day).padStart(2, '0')}`
-    console.log("anilistDataYearRelease: ", anilistDataYearRelease);
+    console.log("Anilist advanced scores", anilistData.advancedScores);
+    console.log("Anilist score",anilistData.score);
 
 
     return (
@@ -188,7 +199,7 @@ function Results2() {
                                         </tr>
                                         <tr>
                                             <td>Rating</td>
-                                            <td>{anilistData.Media.averageScore}</td>
+                                            <td>{anilistData.Media.averageScore}/100</td>
                                         </tr>
                                         <tr>
                                             <td>MAL ID</td>
@@ -222,7 +233,7 @@ function Results2() {
                                                     <p>Rating: {item.attributes?.averageRating || "No rating"}</p>
                                                     <p>Test: {item.attributes?.startDate}</p>
                                                     <p>Test2: {maljikanDataYearRelease}</p>
-                                                    <p>Test3: {} </p>
+                                                    <p>Test3: {anilistDataYearRelease}</p>
                                                 </td>
                                             </tr>
                                         ))}

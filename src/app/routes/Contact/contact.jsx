@@ -45,9 +45,6 @@ function Contact() {
                                     Send Message
                                 </a>
                             </form>
-                            <h4>
-                                Or contact me via Github or Bluesky
-                            </h4>
                         </div>
                     </div>
                 </div>

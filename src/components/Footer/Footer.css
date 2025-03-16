@@ -18,7 +18,7 @@ a {
     box-shadow: inset 0 -1px 0 hsla(0, 0%, 100%, 0.4);
 }
 
-a:hover {
+.footerlinks:hover {
     box-shadow: inset 0 -1.2em 0 hsla(0, 0%, 100%, 0.4);
 }
 
