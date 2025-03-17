@@ -73,6 +73,7 @@
     margin: 50px auto;
     justify-content: center; /* centers the flex children horizontally */
     align-items: center; /* centers the flex children vertically (if needed) */
+    flex-wrap: wrap;
 }
 
 .contact_us .mainImg {

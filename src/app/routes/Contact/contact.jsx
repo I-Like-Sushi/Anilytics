@@ -21,15 +21,17 @@ function Contact() {
 
     return (
         <>
-            <Nav />
+            <Nav/>
             <div className="contact_us">
                 <div className="responsive-container-block bigContainer">
                     <div className="responsive-container-block Container">
                         <div className="responsive-cell-block wk-desk-5 wk-ipadp-4 wk-tab-12 wk-mobile-12">
-                            <img className="mainImg" src={ShiroBako1} alt="Contact" />
+                            <img className="mainImg" src={ShiroBako1} alt="Contact"/>
                         </div>
-                        <h2 id="not-working">The form box is coming soon! In the mean time please contact me on Bluesky or visit my Github page!</h2>
-                        <div id="email-container" className="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12">
+                        <h2 id="not-working">The form box is coming soon! In the mean time please contact me on Bluesky
+                            or visit my Github page!</h2>
+                        <div id="email-container"
+                             className="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12">
                             <p className="text-blk heading">Get in touch</p>
                             <form className="formTable" id="izml">
                                 <div className="firstRow">
@@ -78,7 +80,7 @@ function Contact() {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 }

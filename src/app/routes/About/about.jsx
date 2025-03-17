@@ -46,7 +46,7 @@ function About() {
                             What&#39;s next for Anilytics?
                         </p>
                         <p className="text-blk subHeading">
-                            But once I have finished my assignment, I shall continue creating and adding more. I want to extend search requests.
+                            Once I have finished my assignment, I shall continue creating and adding more. I want to extend search requests.
                             I want to create a Data page in which financials of Animation studios are reported.
                             But before I will do any of that, I want to first get more sources and adding an option to also search for manga&#39;s.
                         </p>
