@@ -14,7 +14,7 @@ function Data() {
             <div className="inner-container-Construction">
                 <div className="outer-container-Construction">
                     <img src={DoItYourself1} alt=""/>
-                    <h2>This page is under construction</h2>
+                    <h2 id="under-construction">This page is under construction</h2>
                 </div>
             </div>
             <Footer />

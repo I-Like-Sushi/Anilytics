@@ -4,7 +4,7 @@ import Nav from "../../../components/Nav/Nav.jsx";
 import Footer from "../../../components/Footer/Footer.jsx";
 import { MalJikanContext } from "../../MalJikanContext.jsx";
 import { ExtraAnimeContext } from "../../ExtraAnimeContext.jsx";
-import "./results.css";
+import "./details.css";
 
 function Results() {
     const { id } = useParams();

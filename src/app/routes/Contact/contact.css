@@ -48,6 +48,20 @@
     justify-content: flex-start;
 }
 
+#email-container {
+    border: 3px dashed red;
+}
+
+#not-working {
+    color: green;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
 .contact_us .responsive-container-block.bigContainer {
     padding: 10px 30px;
 }

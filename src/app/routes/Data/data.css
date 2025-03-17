@@ -21,6 +21,22 @@
     padding: 20px;
 }
 
+#under-construction {
+    font-size: 80px;
+}
+
 img{
     width: 40%;
+}
+
+@media (max-width: 926px) {
+    #under-construction {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    #under-construction {
+        font-size: 25px;
+    }
 }
