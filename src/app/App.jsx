@@ -4,9 +4,9 @@ import Contact from '../app/routes/Contact/contact';
 import About from '../app/routes/About/about';
 import Data from '../app/routes/Data/data';
 import Home from '../app/routes/Home/home';
-import LoginForm from "./routes/Log In/loginForm/LoginForm.jsx";
 import NotFound from "./routes/NotFound/NotFound.jsx";
 import Details from "./routes/Result/details.jsx";
+import LogIn from "./routes/Log In/logIn.jsx";
 
 function App() {
     return (
@@ -15,7 +15,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/data" element={<Data />} />
-            <Route path="/Loginform" element={<LoginForm />} />
+            <Route path="/LogIn" element={<LogIn />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="*" element={<NotFound />} />
         </Routes>

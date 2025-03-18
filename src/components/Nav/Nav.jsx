@@ -29,7 +29,7 @@ function Nav() {
 
             {/* Log In Button */}
             <div className="log-in-button">
-                <Link to="/loginForm">Log In</Link>
+                <Link to="/logIn">Log In</Link>
             </div>
 
             {/* Hamburger Menu Icon for Mobile */}
