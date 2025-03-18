@@ -72,9 +72,16 @@ table tbody td{
     border: 1px solid #ddd;
 }
 
-.maljikanWrapper, .kitsuWrapper, .anilistWrapper{
+.maljikanWrapper, .kitsuWrapper, .anilistWrapper, .maljikanWrapperbottom{
     width: 100%;
     margin-top: 20px;
+}
+.source-links {
+    color: black;
+}
+
+.source-links:hover {
+    color: blue;
 }
 
 /* Responsive adjustments for small screens */

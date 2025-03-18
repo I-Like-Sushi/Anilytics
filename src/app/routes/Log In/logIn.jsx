@@ -24,7 +24,7 @@ function logIn() {
                 <button>Log In</button>
             </form>
             </body>
-            < Footer />
+            <Footer />
         </>
     )
 }

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Nav from "../../../components/Nav/Nav.jsx";
 import Footer from "../../../components/Footer/Footer.jsx";
 import "./details.css";
-import error from "eslint-plugin-react/lib/util/error.js";
 
 
 function Details() {
@@ -43,6 +42,7 @@ function Details() {
               Media(idMal: $idMal, type: ANIME) {
                 id
                 idMal
+                siteUrl
                 averageScore
                 title {
                     romaji
@@ -115,7 +115,7 @@ function Details() {
             await Promise.all([fetchMaljikanById(), fetchAnilistById()]);
         }
         fetchAllData();
-    }, [id]);
+    }, [id]); // Don't remove or add. Will break code.
 
     useEffect(() => {
         console.log("XXX Maljikan data:", maljikanData);
@@ -133,7 +133,7 @@ function Details() {
         if (maljikanData){
             fetchKitsuData();
         }
-    }, [maljikanData]);
+    }, [maljikanData]); // Don't remove or add. Will break code.
 
     // Render a loading message until data is ready
     if (loading) {
@@ -149,7 +149,7 @@ function Details() {
     }
 
     const maljikanDataYearRelease = `${maljikanData.aired?.prop?.from?.year}-${String(maljikanData.aired?.prop?.from?.month).padStart(2, '0')}-${String(maljikanData.aired?.prop?.from?.day).padStart(2, '0')}`
-    const anilistDataYearRelease = `${anilistData.Media.startDate.year}-${String(anilistData.Media.startDate.month).padStart(2, '0')}-${String(anilistData.Media.startDate.day).padStart(2, '0')}`
+    // const anilistDataYearRelease = `${anilistData.Media.startDate.year}-${String(anilistData.Media.startDate.month).padStart(2, '0')}-${String(anilistData.Media.startDate.day).padStart(2, '0')}`
 
     return (
         <>
@@ -178,67 +178,56 @@ function Details() {
                             <p>No results found on Anilist.</p>
                         )}
 
-                        {anilistData ? (
-                            <div className="anilistWrapper">
-                                <h3>Anilist Results</h3>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Property</th>
-                                            <th>Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Title</td>
-                                            <td>{anilistData.Media.title.romaji}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rating</td>
-                                            <td>{anilistData.Media.averageScore}/100</td>
-                                        </tr>
-                                        <tr>
-                                            <td>MAL ID</td>
-                                            <td>{anilistData.Media.idMal}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        ) : (
-                            <p>No results found on Anilist.</p>
-                        )}
-
-                        {kitsuData.length > 0 ? (
-                            <div className="kitsuWrapper">
-                                <h3>Kitsu Results</h3>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Index</th>
-                                            <th>Anime obj</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {kitsuData
-                                        .filter((item) => maljikanDataYearRelease === item.attributes?.startDate)
-                                        .map((item, index) => (
-                                            <tr key={item.id || `kitsu-${index}`} className="extra-result-item">
-                                                <td>{index}</td>
-                                                <td>
-                                                    <p>Title: {item.attributes?.titles?.ja_jp || "No Title"}</p>
-                                                    <p>Rating: {item.attributes?.averageRating || "No rating"}</p>
-                                                    <p>Test: {item.attributes?.startDate}</p>
-                                                    <p>Test2: {maljikanDataYearRelease}</p>
-                                                    <p>Test3: {anilistDataYearRelease}</p>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ) : (
-                            <p>No results found on Kitsu.</p>
-                        )}
+                        <div className="maljikanWrapperbottom">
+                            <h3>Rating results:</h3>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Source</th>
+                                    <th>Rating</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><a className="source-links" href={maljikanData.url} target="_blank">MyAnimeList</a></td>
+                                    <td>{maljikanData.score}/10</td>
+                                </tr>
+                                <tr>
+                                    <td><a className="source-links" href={anilistData.Media.siteUrl} target="_blank">Anilist</a></td>
+                                    <td>{anilistData.Media.averageScore}/100</td>
+                                </tr>
+                                <tr>
+                                    {kitsuData.length > 0 ? (
+                                        <td>
+                                            {kitsuData
+                                                .filter((item) => maljikanDataYearRelease === item.attributes?.startDate)
+                                                .map((item, index) => (
+                                                    <span key={item.id || `kitsu-${index}`}>
+                                                <a className="source-links" href={item.links?.self} target="_blank">Kitsu</a>
+                                                        {/* Their website is not up to date in their API. Shows .io domain while the updated website is .app */}
+                                                    </span>
+                                                ))}
+                                        </td>
+                                    ) : (
+                                        <td>No Data Available</td>
+                                    )}
+                                    {kitsuData.length > 0 ? (
+                                        <td>
+                                            {kitsuData
+                                                .filter((item) => maljikanDataYearRelease === item.attributes?.startDate)
+                                                .map((item, index) => (
+                                                    <span key={item.id || `kitsu-${index}`}>
+                                                {item.attributes?.averageRating || "No rating"}/100
+                                                    </span>
+                                                ))}
+                                        </td>
+                                    ) : (
+                                        <td>No Data Available</td>
+                                    )}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             ) : (
