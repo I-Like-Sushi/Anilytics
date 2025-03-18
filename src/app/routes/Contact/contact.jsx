@@ -28,8 +28,11 @@ function Contact() {
                         <div className="responsive-cell-block wk-desk-5 wk-ipadp-4 wk-tab-12 wk-mobile-12">
                             <img className="mainImg" src={ShiroBako1} alt="Contact"/>
                         </div>
-                        <h2 id="not-working">The form box is coming soon! In the mean time please contact me on Bluesky
-                            or visit my Github page!</h2>
+                        <h2 id="not-working">The form box is coming soon! <br/>In the mean time please contact me on
+                            <a className="bsky" href="https://bsky.app/profile/anilytics.bsky.social"
+                               target="_blank"> Bluesky</a>, visit my <a className="github"
+                                                                        href="https://github.com/I-Like-Sushi"
+                                                                        target="_blank">Github</a> page, or contact me directly by emailing to: anilytics@outlook.com.</h2>
                         <div id="email-container"
                              className="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12">
                             <p className="text-blk heading">Get in touch</p>

@@ -54,8 +54,6 @@
 
 #not-working {
     color: green;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -64,6 +62,22 @@
 
 .contact_us .responsive-container-block.bigContainer {
     padding: 10px 30px;
+}
+
+.bsky {
+    color: #161e27;
+}
+
+.bsky:hover {
+    color: rgb(0, 133, 255);
+}
+
+.github {
+    color: #3d444d;
+}
+
+.github:hover {
+    color: hsl(216, 28%, 50%);
 }
 
 .contact_us .responsive-container-block.Container {
