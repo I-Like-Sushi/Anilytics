@@ -13,9 +13,6 @@ function HeaderHome() {
                 <h1>Humanize analytics</h1>
                 <h4>Search for your favourite Anime and compare the results from different sources!</h4>
                 <Searchbar />
-                <p>
-
-                </p>
             </section>
         </header>
 

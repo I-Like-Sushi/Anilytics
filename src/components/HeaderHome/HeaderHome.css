@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 90vh;
+    height: 85vh;
     width: 100%;
     /*background-attachment: fixed;*/
 
@@ -20,4 +20,12 @@
     margin: 0 20px;
     padding: 20px 0;
     width: 100%;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h4 {
+    font-size: 28px;
 }

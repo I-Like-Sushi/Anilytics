@@ -204,7 +204,7 @@ function Details() {
                                                 .map((item, index) => (
                                                     <span key={item.id || `kitsu-${index}`}>
                                                 <a className="source-links" href={item.links?.self} target="_blank">Kitsu</a>
-                                                        {/* Their website is not up to date in their API. Shows .io domain while the updated website is .app */}
+                                                        {/* API not up to date. item.links.self shows .io domain while the updated website is .app */}
                                                     </span>
                                                 ))}
                                         </td>

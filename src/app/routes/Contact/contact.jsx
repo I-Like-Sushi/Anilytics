@@ -7,6 +7,8 @@ function Contact() {
     const handleMailTo = (e) => {
         e.preventDefault();
 
+        // The functionality of the formbox will be done later since this has to be done through the back-end if I do not want to get spammed.
+
         const fullName = document.getElementById("fullName").value;
         const emailInput = document.getElementById("email").value;
         const messageInput = document.getElementById("message").value;
