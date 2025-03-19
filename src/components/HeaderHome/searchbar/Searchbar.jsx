@@ -1,4 +1,3 @@
-// SearchBar.jsx
 import { useContext, useRef, useState } from 'react';
 import { MalJikanContext } from '../../../app/MalJikanContext.jsx';
 import './Searchbar.css';

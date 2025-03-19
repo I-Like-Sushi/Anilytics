@@ -1,8 +1,15 @@
 .header {
-    background: #130f40;
     color: #fff;
     display: flex;
     flex-direction: row;
+    background-image: url('../../assets/images/AnimeWallpaper4_waifu2x_art_noise1_scaleWebp.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+    width: 100%;
+    /*background-attachment: fixed;*/
+
 }
 
 .inner-container {
@@ -13,6 +20,4 @@
     margin: 0 20px;
     padding: 20px 0;
     width: 100%;
-    border: 3px dashed red;
 }
-
