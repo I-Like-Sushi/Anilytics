@@ -22,9 +22,6 @@ function About() {
                             This way if you ever have the feeling that one source might be biased, you than can compare
                             that source with the other sources and this way you don&#39;t have to
                             feel forced to blindly trust one source.
-                            {
-                                // Humanize Statistics //
-                            }
                         </p>
                         <p className="text-blk heading">
                             Why was Anilytics created?
@@ -71,7 +68,9 @@ function About() {
                             but I&#39;m incredibly grateful for it. If you even have the slightest suggestion for me,
                             please feel free to contact me by sending me your feedback and/or ideas. You can contact me
                             by sending me a message in the contact page. Or if you prefer, you can also check below for
-                            direct links to my Github.
+                            direct links to my <a className="github"
+                                                  href="https://github.com/I-Like-Sushi"
+                                                  target="_blank">Github</a>.
                             I would love to hear from you!
                         </p>
                     </div>

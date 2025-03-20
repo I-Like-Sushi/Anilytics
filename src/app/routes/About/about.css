@@ -121,7 +121,10 @@
     padding: 10px 0 0 0;
 }
 
-/* Responsive adjustments for smaller screens */
+.github {
+    color: whitesmoke;
+}
+
 @media (max-width: 1024px) {
     .responsive-container-block.Container {
         flex-direction: column-reverse; /* Stack items vertically */

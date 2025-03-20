@@ -45,6 +45,18 @@
     background-color: #357ae8;
 }
 
+.random-button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-left: none;
+    background-color: rebeccapurple;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 /* Results list styling */
 .results-list {
     width: 100%;
