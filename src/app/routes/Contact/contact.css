@@ -48,9 +48,6 @@
     justify-content: flex-start;
 }
 
-#email-container {
-    border: 3px dashed red;
-}
 
 #not-working {
     color: green;

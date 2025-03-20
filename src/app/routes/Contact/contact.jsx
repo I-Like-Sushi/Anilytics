@@ -2,16 +2,15 @@ import './contact.css';
 import Nav from "../../../components/Nav/Nav.jsx";
 import Footer from "../../../components/Footer/Footer.jsx";
 import ShiroBako1 from "../../../assets/images/ShiroBako1.png";
-import ReusableModal from "../../ReusableModal.jsx"; // Make sure the path is correct
-import { useState} from "react";
+import ReusableModal from "../../ReusableModal.jsx";
+import { useState } from "react";
 
 function Contact() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Here you would typically handle form submission logic.
-        // For this example, we open the modal.
+        e.target.reset();
         setIsModalOpen(true);
     };
 
@@ -26,67 +25,24 @@ function Contact() {
                         <div className="responsive-cell-block wk-desk-5 wk-ipadp-4 wk-tab-12 wk-mobile-12">
                             <img className="mainImg" src={ShiroBako1} alt="Contact" />
                         </div>
-                        <h2 id="not-working">
-                            The form box is coming soon! <br />In the mean time please contact me on
-                            <a
-                                className="bsky"
-                                href="https://bsky.app/profile/anilytics.bsky.social"
-                                target="_blank"
-                                rel="noreferrer"
-                            > Bluesky</a>, visit my <a
-                            className="github"
-                            href="https://github.com/I-Like-Sushi"
-                            target="_blank"
-                            rel="noreferrer"
-                        >Github</a> page, or contact me directly by emailing to: anilytics@outlook.com.
-                        </h2>
-                        <div
-                            id="email-container"
-                            className="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12"
-                        >
+                        <div id="email-container" className="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12">
                             <p className="text-blk heading">Get in touch</p>
                             <form className="formTable" id="izml" onSubmit={handleSubmit}>
                                 <div className="firstRow">
                                     <div className="fullNameArea">
                                         <p className="cardHead">Full Name</p>
-                                        <input
-                                            className="fullName"
-                                            id="fullName"
-                                            name="fullName"
-                                            type="text"
-                                            required
-                                        />
+                                        <input className="fullName" id="fullName" name="fullName" type="text" required />
                                     </div>
                                     <div className="emailArea">
                                         <p className="cardHead">Email Address</p>
-                                        <input
-                                            className="email"
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            required
-                                        />
+                                        <input className="email" id="email" name="email" type="email" required />
                                     </div>
                                 </div>
                                 <div className="messageArea">
                                     <p className="cardHead">Message</p>
-                                    <textarea
-                                        className="message"
-                                        cols="30"
-                                        id="message"
-                                        name="message"
-                                        rows="10"
-                                        required
-                                    ></textarea>
+                                    <textarea className="message" cols="30" id="message" name="message" rows="10" required></textarea>
                                 </div>
-                                {/* Use a <button> for form submission for better semantics */}
-                                <button
-                                    type="submit"
-                                    className="submit"
-                                    id="w-c-s-bgc_p-1-dm-id-4"
-                                >
-                                    Send Message
-                                </button>
+                                <button type="submit" className="submit" id="w-c-s-bgc_p-1-dm-id-4">Send Message</button>
                             </form>
                         </div>
                     </div>
@@ -98,7 +54,7 @@ function Contact() {
                 onClose={closeModal}
                 title="Message Sent"
             >
-                <p>Your message has been sent successfully!</p>
+                <p>Your message has been sent successfully! Thank you for reaching out.</p>
             </ReusableModal>
         </>
     );
