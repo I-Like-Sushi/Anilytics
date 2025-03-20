@@ -57,6 +57,14 @@
     transition: background-color 0.3s ease;
 }
 
+.random-button:hover {
+    background-color: #8a2be2;
+}
+
+.random-button:active {
+    box-shadow: none; /* Remove shadow when clicked */
+}
+
 /* Results list styling */
 .results-list {
     width: 100%;

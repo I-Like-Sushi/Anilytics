@@ -1,44 +1,51 @@
-import './contact.css'
+import './contact.css';
 import Nav from "../../../components/Nav/Nav.jsx";
 import Footer from "../../../components/Footer/Footer.jsx";
 import ShiroBako1 from "../../../assets/images/ShiroBako1.png";
+import ReusableModal from "../../ReusableModal.jsx"; // Make sure the path is correct
+import { useState} from "react";
 
 function Contact() {
-    const handleMailTo = (e) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        // The functionality of the formbox will be done later since this has to be done through the back-end if I do not want to get spammed.
-
-        const fullName = document.getElementById("fullName").value;
-        const emailInput = document.getElementById("email").value;
-        const messageInput = document.getElementById("message").value;
-
-        const toEmail = "Anilytics@outlook.com";
-
-        const subject = "Contact Form Submission";
-        const body = `Full Name: ${fullName}\nEmail: ${emailInput}\nMessage: ${messageInput}`;
-
-        window.location.href = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // Here you would typically handle form submission logic.
+        // For this example, we open the modal.
+        setIsModalOpen(true);
     };
+
+    const closeModal = () => setIsModalOpen(false);
 
     return (
         <>
-            <Nav/>
+            <Nav />
             <div className="contact_us">
                 <div className="responsive-container-block bigContainer">
                     <div className="responsive-container-block Container">
                         <div className="responsive-cell-block wk-desk-5 wk-ipadp-4 wk-tab-12 wk-mobile-12">
-                            <img className="mainImg" src={ShiroBako1} alt="Contact"/>
+                            <img className="mainImg" src={ShiroBako1} alt="Contact" />
                         </div>
-                        <h2 id="not-working">The form box is coming soon! <br/>In the mean time please contact me on
-                            <a className="bsky" href="https://bsky.app/profile/anilytics.bsky.social"
-                               target="_blank"> Bluesky</a>, visit my <a className="github"
-                                                                        href="https://github.com/I-Like-Sushi"
-                                                                        target="_blank">Github</a> page, or contact me directly by emailing to: anilytics@outlook.com.</h2>
-                        <div id="email-container"
-                             className="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12">
+                        <h2 id="not-working">
+                            The form box is coming soon! <br />In the mean time please contact me on
+                            <a
+                                className="bsky"
+                                href="https://bsky.app/profile/anilytics.bsky.social"
+                                target="_blank"
+                                rel="noreferrer"
+                            > Bluesky</a>, visit my <a
+                            className="github"
+                            href="https://github.com/I-Like-Sushi"
+                            target="_blank"
+                            rel="noreferrer"
+                        >Github</a> page, or contact me directly by emailing to: anilytics@outlook.com.
+                        </h2>
+                        <div
+                            id="email-container"
+                            className="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12"
+                        >
                             <p className="text-blk heading">Get in touch</p>
-                            <form className="formTable" id="izml">
+                            <form className="formTable" id="izml" onSubmit={handleSubmit}>
                                 <div className="firstRow">
                                     <div className="fullNameArea">
                                         <p className="cardHead">Full Name</p>
@@ -72,20 +79,27 @@ function Contact() {
                                         required
                                     ></textarea>
                                 </div>
-                                <a
+                                {/* Use a <button> for form submission for better semantics */}
+                                <button
+                                    type="submit"
                                     className="submit"
-                                    href="#"
                                     id="w-c-s-bgc_p-1-dm-id-4"
-                                    onClick={handleMailTo}
                                 >
                                     Send Message
-                                </a>
+                                </button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
+            <ReusableModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                title="Message Sent"
+            >
+                <p>Your message has been sent successfully!</p>
+            </ReusableModal>
         </>
     );
 }
