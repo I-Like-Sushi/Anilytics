@@ -34,7 +34,7 @@ function Details() {
             console.error(err);
         } finally {
             console.log("Done loading fetchMaljikanById");
-            setIsMaljikanLoaded(true); // Mark as complete
+            setIsMaljikanLoaded(true);
         }
     };
 
@@ -97,13 +97,13 @@ function Details() {
             console.error(err);
         } finally {
             console.log("Done loading fetchAnilistById");
-            setIsAnilistLoaded(true); // Mark as complete
+            setIsAnilistLoaded(true);
         }
     };
 
     const fetchKitsuData = async () => {
         try {
-            if (!maljikanData) return; // Only fetch if MalJikan data is available
+            if (!maljikanData) return;
             const response = await fetch(
                 `https://kitsu.io/api/edge/anime?filter[text]=${encodeURIComponent(maljikanData.title_japanese)}`
             );
@@ -117,13 +117,13 @@ function Details() {
             console.error("Kitsu API error:", err);
         } finally {
             console.log("Done loading fetchKitsuData");
-            setIsKitsuLoaded(true); // Mark as complete
+            setIsKitsuLoaded(true);
         }
     };
 
     useEffect(() => {
         async function fetchAllData() {
-            setLoading(true); // Ensure loading starts
+            setLoading(true);
             await Promise.all([fetchMaljikanById(), fetchAnilistById()]);
         }
         fetchAllData();
@@ -132,7 +132,7 @@ function Details() {
     useEffect(() => {
         console.log("Maljikan data changed", maljikanData);
         if (maljikanData) {
-            fetchKitsuData(); // Fetch Kitsu data after MalJikan data loads
+            fetchKitsuData();
         }
     }, [maljikanData]); // Don't remove or add. Will break code.
 
@@ -144,7 +144,7 @@ function Details() {
         }
     }, [isMaljikanLoaded, isAnilistLoaded, isKitsuLoaded]);
 
-    // Render a loading message until data is ready
+
     if (loading) {
         return (
             <>

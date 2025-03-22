@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from 'react';
-import { MalJikanContext } from '../../../app/MalJikanContext.jsx';
+import { MalJikanContext } from '../../../context/MalJikanContext.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import './Searchbar.css';
 
