@@ -38,3 +38,17 @@
     color: #007BFF;
     font-weight: bold;
 }
+
+.profile-button {
+    background-color: #00ddfa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: #ff6f61; /* Coral hover color */
+    color: white;
+}

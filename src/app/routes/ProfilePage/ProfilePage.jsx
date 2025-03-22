@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './ProfilePage.css';
 import Nav from "../../../components/Nav/Nav.jsx";
 import Footer from "../../../components/Footer/Footer.jsx";
+import blankProfilePicture from "../../../assets/images/blankProfilePicture.webp"
 
 function ProfilePage() {
     // Initialize state for the user's profile data.
@@ -10,7 +11,7 @@ function ProfilePage() {
         name: 'John Doe',
         bio: 'A passionate developer with a love for creating dynamic user experiences.',
         email: 'john.doe@example.com',
-        image: 'https://via.placeholder.com/150'
+        image: blankProfilePicture,
     });
 
     // State to determine whether the component is in edit mode.
@@ -41,7 +42,6 @@ function ProfilePage() {
         <div className="profile-container">
             <div className="profile-card">
                 {editMode ? (
-                    // When in edit mode, display a form for updating profile data.
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="name">Name: </label>
@@ -98,7 +98,7 @@ function ProfilePage() {
                 )}
 
                 {/* Toggle button to enter/exit edit mode */}
-                <button onClick={handleToggleEdit}>
+                <button className="profile-button" onClick={handleToggleEdit}>
                     {editMode ? 'Cancel' : 'Edit Profile'}
                 </button>
             </div>
