@@ -33,9 +33,6 @@ function Nav() {
                 <li>
                     <Link to="/about">About</Link>
                 </li>
-                <li>
-                    <Link to="/data">Data</Link>
-                </li>
                 {user && (
                     <li>
                         <Link to="/ProfilePage">Profile</Link>

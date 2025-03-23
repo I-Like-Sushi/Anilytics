@@ -1,0 +1,83 @@
+.create-account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('../../../../assets/images/AnimeWallpaper1webp.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.create-account-form {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.create-account-form h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #333;
+}
+
+.error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.create-account-form label {
+    margin-bottom: 8px;
+    display: block;
+    color: #555;
+}
+
+.create-account-form input,
+.create-account-form textarea {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.create-account-form input:focus,
+.create-account-form textarea:focus {
+    border-color: #888;
+    outline: none;
+}
+
+.create-account-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-account-form button:hover {
+    background-color: #0056b3;
+}
+
+.login-link {
+    color: grey;
+    text-decoration: underline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+

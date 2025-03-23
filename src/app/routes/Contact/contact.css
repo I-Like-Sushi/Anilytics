@@ -96,11 +96,11 @@
 }
 
 .contact_us .responsive-cell-block.wk-desk-5 {
-    flex: 0 0 41.6667%; /* Ensures the image container is 5/12 of the width */
+    flex: 0 0 41.6667%;
 }
 
 .contact_us .responsive-cell-block.wk-desk-7 {
-    flex: 0 0 58.3333%; /* Ensures the form container is 7/12 of the width */
+    flex: 0 0 58.3333%;
     background-color: #333333;
     padding: 30px 50px;
 }
