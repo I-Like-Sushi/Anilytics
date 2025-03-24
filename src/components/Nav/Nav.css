@@ -67,6 +67,26 @@ body {
     background-color: #005bb5;
 }
 
+
+.log-out-button {
+    background-color: #E74C3C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.log-out-button Link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.log-out-button:hover {
+    background-color: #C0392B;
+}
+
 /* Mobile Navigation */
 .menu-toggle {
     display: none; /* Show only on mobile */

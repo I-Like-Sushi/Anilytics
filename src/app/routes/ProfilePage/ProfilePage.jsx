@@ -12,7 +12,7 @@ function ProfilePage() {
         name: 'John Doe',
         bio: 'A passionate developer with a love for creating dynamic user experiences.',
         email: 'john.doe@example.com',
-        image: blankProfilePicture,
+        image: blankProfilePicture, // Default temporary image
     });
 
     const [editMode, setEditMode] = useState(false);
@@ -51,7 +51,7 @@ function ProfilePage() {
     // Update profile inputs
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setProfile(prevProfile => ({ ...prevProfile, [name]: value }));
+        setProfile((prevProfile) => ({ ...prevProfile, [name]: value }));
     };
 
     // Toggle editing mode.
@@ -68,7 +68,7 @@ function ProfilePage() {
         }
         try {
             const response = await axios.put(
-                `https://api.datavortex.nl/Anilytics/users/${decodedToken.username}`,
+                `https://api.datavortex.nl/anilytics/users/${decodedToken.username}/info`,
                 profile,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -79,6 +79,29 @@ function ProfilePage() {
         }
     };
 
+    // Handle profile picture update via file input
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setProfile((prevProfile) => ({
+                    ...prevProfile,
+                    image: reader.result, // Convert file to base64 and set as image
+                }));
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    // Reset profile picture to default (blankProfilePicture)
+    const handleResetImage = () => {
+        setProfile((prevProfile) => ({
+            ...prevProfile,
+            image: blankProfilePicture,
+        }));
+    };
+
     return (
         <>
             <Nav />
@@ -86,6 +109,29 @@ function ProfilePage() {
                 <div className="profile-card">
                     {editMode ? (
                         <form onSubmit={handleSubmit}>
+                            {/* Display current profile picture */}
+                            <img
+                                src={profile.image}
+                                alt="Profile"
+                                className="profile-pic"
+                            />
+                            {/* Image upload field */}
+                            <div className="form-group">
+                                <label htmlFor="image">Profile Picture: </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                />
+                                <button
+                                    type="button"
+                                    className="profile-button"
+                                    onClick={handleResetImage}
+                                >
+                                    Reset to Default
+                                </button>
+                            </div>
+                            {/* Editable form fields */}
                             <div className="form-group">
                                 <label htmlFor="name">Name: </label>
                                 <input
@@ -106,27 +152,36 @@ function ProfilePage() {
                                     onChange={handleChange}
                                 />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email: </label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    value={profile.email}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <button type="submit">Save Profile</button>
-                            <button type="button" onClick={handleToggleEdit}>Cancel</button>
+                            {/* Submit and Cancel buttons */}
+                            <button type="submit" className="profile-button">
+                                Save
+                            </button>
+                            <button
+                                type="button"
+                                className="profile-button"
+                                onClick={handleToggleEdit}
+                            >
+                                Cancel
+                            </button>
                         </form>
                     ) : (
-                        <div className="profile-view">
-                            <img src={profile.image} alt="Profile" />
-                            <h2>{profile.name}</h2>
-                            <p>{profile.bio}</p>
-                            <p><strong>Email:</strong> {profile.email}</p>
-                            <button onClick={handleToggleEdit}>Edit Profile</button>
-                        </div>
+                        <>
+                            {/* Display profile details */}
+                            <img
+                                src={profile.image}
+                                alt="Profile"
+                                className="profile-pic"
+                            />
+                            <h2 className="profile-name">{profile.name}</h2>
+                            <p className="profile-bio">{profile.bio}</p>
+                            <p className="profile-email">{profile.email}</p>
+                            <button
+                                className="profile-button"
+                                onClick={handleToggleEdit}
+                            >
+                                Edit Profile
+                            </button>
+                        </>
                     )}
                 </div>
             </div>

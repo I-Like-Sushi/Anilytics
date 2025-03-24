@@ -1,96 +1,101 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './CreateNewAccount.css';
-import Nav from '../../../../components/Nav/Nav.jsx';
-import Footer from '../../../../components/Footer/Footer.jsx';
+import { useNavigate } from 'react-router-dom';
+import blankProfilePicture from '../../../../assets/images/blankProfilePicture.webp';
 
-function CreateNewAccount() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [info, setInfo] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+const CreateNewAccount = () => {
+    const navigate = useNavigate();
+
+    const [form, setForm] = useState({
+        name: '',
+        bio: 'Welcome to my profile!', // Default bio for new users
+        email: '',
+        password: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm((prevForm) => ({
+            ...prevForm,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            await axios.post(
-                'https://api.datavortex.nl/Anilytics/users',
-                {
-                    username,
-                    email,
-                    password,
-                    info,
-                    authorities: [{ authority: 'USER' }], // Keep this if your API requires it
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Api-Key': '', // Required API key
-                    },
-                }
+            const newUser = {
+                name: form.name,
+                bio: form.bio,
+                email: form.email,
+                password: form.password,
+                image: blankProfilePicture, // Assign the default profile picture
+            };
+
+            const response = await axios.post(
+                'https://api.datavortex.nl/anilytics/users',
+                newUser
             );
-            setSuccess('Account created successfully!');
-            setError('');
-        } catch (err) {
-            console.error(err); // Log full error for debugging
-            setError(err.response?.data?.message || 'Failed to create account');
+
+            // Store returned JWT token for immediate use
+            localStorage.setItem('jwtToken', response.data.token);
+
+            // Redirect to the ProfilePage while ensuring synchronization
+            navigate('/profile');
+        } catch (error) {
+            console.error('Error creating account:', error.message);
         }
     };
 
     return (
-        <>
-            <Nav />
-            <div className="create-account-container">
-                <form onSubmit={handleSubmit} className="create-account-form">
-                    <h2>Create a New Account</h2>
-                    {error && <p className="error-message">{error}</p>}
-                    {success && <p className="success-message">{success}</p>}
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        placeholder="Your username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                    <label htmlFor="email">Email Address</label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="you@example.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="••••••••"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <label htmlFor="info">Additional Info</label>
-                    <textarea
-                        id="info"
-                        placeholder="Tell us something about yourself"
-                        value={info}
-                        onChange={(e) => setInfo(e.target.value)}
-                    />
-                    <button type="submit">Create Account</button>
-                    <Link className="login-link" to="/LogIn">
-                        Already have an account? Log In
-                    </Link>
-                </form>
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="name">Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                />
             </div>
-            <Footer />
-        </>
+            <div>
+                <label htmlFor="bio">Bio:</label>
+                <input
+                    type="text"
+                    id="bio"
+                    name="bio"
+                    value={form.bio}
+                    onChange={handleChange}
+                />
+            </div>
+            <div>
+                <label htmlFor="email">Email:</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+            <div>
+                <label htmlFor="password">Password:</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
     );
-}
+};
 
 export default CreateNewAccount;

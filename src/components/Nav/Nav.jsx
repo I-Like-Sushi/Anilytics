@@ -42,7 +42,7 @@ function Nav() {
 
             <div className="auth-button">
                 {user ? (
-                    <button onClick={handleLogout}>Log Out</button>
+                    <button className="log-out-button" onClick={handleLogout}>Log Out</button>
                 ) : (
                     <Link className="log-in-button" to="/logIn">Log In</Link>
                 )}
