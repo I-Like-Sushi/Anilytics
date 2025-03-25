@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext.jsx'; // Adjust the path
+import { useAuth } from '../../../context/AuthContext.jsx'; // Adjust the path if necessary
 import './logIn.css';
 import Nav from '../../../components/Nav/Nav.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
@@ -11,46 +11,35 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const { login } = useAuth(); // Use login from AuthContext
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
-        event.preventDefault(); // Stop form reload
-        console.log('Form submitted'); // Debugging
+        event.preventDefault();
 
         try {
             const response = await axios.post(
                 'https://api.datavortex.nl/anilytics/users/authenticate',
-                {
-                    username,
-                    password,
-                },
+                { username, password },
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Api-Key': '',
+                        'X-Api-Key': 'anilytics:XZgYZxpjq6LTYAhvpWA9',
                     },
                 }
             );
 
-            console.log('API response:', response); // Debugging to verify the full response
+            const token = response.data.jwt;
+            localStorage.setItem('jwtToken', token); // Save JWT for future requests
+            login(token); // Update authentication context
+            setSuccess('Login successful!');
+            setError('');
 
-            const token = response.data.jwt; // Correct property for accessing the token
-            console.log('Token:', token); // Debugging to verify the token value is retrieved
-
-            login(token); // Save token and update user context
-            console.log('User logged in!'); // Confirm that login succeeded
-
-            setSuccess('Login successful!'); // Show success message in the UI
-            setError(''); // Clear any existing error message
-
-            navigate('/ProfilePage'); // Navigate to the profile page after successful login
-            console.log('Navigated to ProfilePage'); // Confirm navigation
+            navigate('/ProfilePage'); // Redirect to profile page
         } catch (err) {
-            // Handle errors and provide feedback to the user
-            console.error('Login error:', err); // Debugging to identify issues
-            setError(err.response?.data?.message || 'Failed to log in'); // Set user-visible error
-            setSuccess(''); // Clear any existing success message
+            console.error('Login error:', err);
+            setError(err.response?.data?.message || 'Failed to log in');
+            setSuccess('');
         }
     };
 
@@ -92,5 +81,3 @@ function Login() {
 }
 
 export default Login;
-
-
