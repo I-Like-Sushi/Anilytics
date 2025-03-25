@@ -15,6 +15,7 @@ function ProfilePage() {
     });
     const [isEditing, setIsEditing] = useState(false); // State for edit mode
     const [updatedProfile, setUpdatedProfile] = useState({}); // Temp storage for edits
+    const [emailError, setEmailError] = useState(false); // Tracks if email is invalid
 
     const token = localStorage.getItem('jwtToken'); // Fetch token once
 
@@ -25,20 +26,15 @@ function ProfilePage() {
         const username = decodedToken.sub;
 
         try {
-            console.log("Fetching user...");
             const userResponse = await axios.get(
                 `https://api.datavortex.nl/anilytics/users/${username}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
-            console.log("User Response: ", userResponse.data);
-
             const userInfoResponse = await axios.get(
                 `https://api.datavortex.nl/anilytics/users/${username}/info`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-
-            console.log("User Info Response: ", userInfoResponse.data);
 
             setProfile({
                 name: userResponse.data.username,
@@ -48,11 +44,11 @@ function ProfilePage() {
             });
             setUpdatedProfile({
                 name: userResponse.data.username,
-                bio: userInfoResponse.data.info,
+                bio: userInfoResponse.data,
                 email: userResponse.data.email,
             });
         } catch (error) {
-            console.error("Error fetching profile:", error);
+            console.error('Error fetching profile:', error);
         }
     };
 
@@ -61,36 +57,46 @@ function ProfilePage() {
         fetchProfile();
     }, [token]);
 
-    const handleImageUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
 
-        const formData = new FormData();
-        formData.append('file', file);
+    const handleInputChange = ({ target }) => {
+        const { name, value } = target;
+        setUpdatedProfile({ ...updatedProfile, [name]: value });
+
+        // Validate email if the input name is "email"
+        if (name === 'email') {
+            setEmailError(!validateEmail(value));
+        }
+    };
+
+    const handleSave = async () => {
+        if (emailError || !updatedProfile.email) {
+            alert('Please fix the errors in the form before saving.');
+            return;
+        }
 
         const decodedToken = jwtDecode(token);
         const username = decodedToken.sub;
 
         try {
-            await axios.post(
-                `https://api.datavortex.nl/anilytics/users/${username}/upload`,
-                formData,
+            await axios.put(
+                `https://api.datavortex.nl/anilytics/users/${username}`,
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'multipart/form-data',
-                    },
-                }
+                    name: updatedProfile.name,
+                    email: updatedProfile.email,
+                    info: updatedProfile.bio, // Save "bio" as "info"
+                },
+                { headers: { Authorization: `Bearer ${token}` } }
             );
 
-            fetchProfile(); // Refresh profile after upload
-        } catch (err) {
-            console.error("Error uploading image:", err);
+            setProfile(updatedProfile); // Update the main profile state
+            setIsEditing(false); // Exit edit mode
+        } catch (error) {
+            console.error('Error saving profile:', error);
         }
-    };
-
-    const handleEdit = () => {
-        setIsEditing(true);
     };
 
     const handleCancel = () => {
@@ -99,103 +105,80 @@ function ProfilePage() {
             name: profile.name,
             bio: profile.bio,
             email: profile.email,
-        }); // Reset edited values to original profile
-    };
-
-    const handleSave = async () => {
-        const decodedToken = jwtDecode(token);
-        const username = decodedToken.sub;
-
-        try {
-            const response = await axios.put(
-                `https://api.datavortex.nl/anilytics/users/${username}`,
-                {
-                    name: updatedProfile.name,
-                    email: updatedProfile.email,
-                    info: updatedProfile.bio, // Save the "bio" as "info"
-                },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-
-            console.log("Profile updated successfully:", response.data);
-            setProfile(updatedProfile); // Update profile view
-            setIsEditing(false); // Exit edit mode
-        } catch (error) {
-            console.error("Error saving profile:", error);
-        }
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setUpdatedProfile((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+        });
+        setEmailError(false); // Clear any email validation errors
     };
 
     return (
-        <>
+        <div>
             <Nav />
             <div className="profile-container">
                 <div className="profile-card">
-                    <img
-                        src={profile.image}
-                        alt="Profile"
-                        className="profile-pic"
-                    />
+                    <div className="profile-image">
+                        <img src={profile.image} alt="Profile" className="profile-pic" />
+                        <input
+                            type="file"
+                            className="image-button"
+                            id="upload"
+                            onChange={() => {} /* Replace with custom logic */}
+                        />
+                    </div>
                     {isEditing ? (
                         <>
-                            <input
-                                type="text"
-                                name="name"
-                                value={updatedProfile.name}
-                                onChange={handleInputChange}
-                                className="profile-input"
-                            />
+
+                            <label htmlFor="upload" className="custom-upload-button">
+                                Change Profile Picture
+                            </label>
+                            <h2 className="profile-name">{profile.name || "Loading name..."}</h2>
+                            <p className="p-email">Bio:</p>
                             <textarea
                                 name="bio"
                                 value={updatedProfile.bio}
                                 onChange={handleInputChange}
                                 className="profile-input"
                             />
+                            <p className="p-email">Email:</p>
                             <input
                                 type="email"
                                 name="email"
                                 value={updatedProfile.email}
                                 onChange={handleInputChange}
-                                className="profile-input"
+                                className={`profile-email ${emailError ? 'input-error' : ''}`}
+                                placeholder="Enter a valid email address"
                             />
-                            <div>
-                                <button onClick={handleSave} className="profile-button">
-                                    Save
-                                </button>
-                                <button onClick={handleCancel} className="profile-button">
-                                    Cancel
-                                </button>
-                            </div>
+                            {emailError && (
+                                <p style={{ color: 'red', fontSize: '14px' }}>
+                                    Please enter a valid email address.
+                                </p>
+                            )}
+                            <button
+                                className="save-button"
+                                onClick={handleSave}
+                                disabled={emailError || !updatedProfile.email}
+                            >
+                                Save
+                            </button>
+                            <button className="cancel-button" onClick={handleCancel}>
+                                Cancel
+                            </button>
                         </>
                     ) : (
                         <>
-                            <h2 className="profile-name">{profile.name || "Loading name..."}</h2>
-                            <p className="profile-bio">{profile.bio || "Empty bio"}</p>
-                            <p className="profile-contact">
-                                <a href={`mailto:${profile.email}`}>{profile.email || "Loading email..."}</a>
-                            </p>
-                            <button onClick={handleEdit} className="profile-button">
-                                Edit
+                            <p className="profile-name">{profile.name}</p>
+                            <strong><p>Bio:</p></strong>
+                            <p className="profile-bio">{profile.bio}</p>
+                            <br/>
+                            <strong><p>Email:</p></strong><p>{profile.email}</p>
+                            <br/>
+                            <button className="profile-button" onClick={() => setIsEditing(true)}>
+                                Edit Profile
                             </button>
                         </>
                     )}
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="profile-button"
-                    />
                 </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }
 

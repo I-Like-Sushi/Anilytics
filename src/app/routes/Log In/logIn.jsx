@@ -24,7 +24,7 @@ function Login() {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Api-Key': 'anilytics:XZgYZxpjq6LTYAhvpWA9',
+                        'X-Api-Key': '',
                     },
                 }
             );
