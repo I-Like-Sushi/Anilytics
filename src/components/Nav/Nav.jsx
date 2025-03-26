@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx'; // Adjust the path as needed
 import './Nav.css';
+import AnilyticsLogo from '../../assets/logo/AnilyticsLogo.png';
 
 function Nav() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -22,7 +23,7 @@ function Nav() {
         <nav className="navbar">
             <div className="logo">
                 <Link to="/">
-                    <img src="" alt="Current Logo" />
+                    <img className="AnilyticsLogo" src={AnilyticsLogo} alt="Anilytics Logo" />
                 </Link>
             </div>
 

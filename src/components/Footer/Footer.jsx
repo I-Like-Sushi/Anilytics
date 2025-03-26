@@ -5,11 +5,8 @@ function Footer () {
     return (
         <footer>
             <ul>
-                <li><a className="footerlinks" href="https://bsky.app/profile/anilytics.bsky.social" target="_blank">BlueSky</a></li>
-                <li><a className="footerlinks" href="">Example2</a></li>
-                <li><a className="footerlinks" href="">Example3</a></li>
-                <li><a className="footerlinks" href="">Example4</a></li>
                 <li><a className="footerlinks" href="https://github.com/I-Like-Sushi" target="_blank">Github</a></li>
+                <li><a className="footerlinks" href="https://bsky.app/profile/anilytics.bsky.social" target="_blank">BlueSky</a></li>
             </ul>
         </footer>
     )

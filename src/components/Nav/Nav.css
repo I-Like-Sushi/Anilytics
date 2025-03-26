@@ -87,6 +87,11 @@ body {
     background-color: #C0392B;
 }
 
+.AnilyticsLogo {
+    width: 100%;
+    height: 100px;
+}
+
 /* Mobile Navigation */
 .menu-toggle {
     display: none; /* Show only on mobile */
