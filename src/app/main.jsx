@@ -3,8 +3,8 @@ import App from './App.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MalJikanContextProvider } from '../context/MalJikanContext.jsx';
 import { ExtraAnimeContextProvider } from '../context/ExtraAnimeContext.jsx';
-import { AuthProvider } from '../context/AuthContext.jsx'; // Import AuthProvider
-import Modal from 'react-modal'; // Import react-modal
+import { AuthProvider } from '../context/AuthContext.jsx';
+import Modal from 'react-modal';
 
 Modal.setAppElement("#root");
 

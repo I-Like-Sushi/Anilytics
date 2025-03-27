@@ -17,13 +17,13 @@ function CreateNewAccount() {
         event.preventDefault();
         try {
             const response = await axios.post(
-                'https://api.datavortex.nl/anilytics/users',
+                'https://frontend-educational-backend.herokuapp.com/api/auth/signup',
                 {
                     username,
                     email,
                     password,
                     info,
-                    authorities: [{ authority: 'USER' }],
+                    role: ["user"],
                 },
                 {
                     headers: {
@@ -32,6 +32,7 @@ function CreateNewAccount() {
                     },
                 }
             );
+            console.log("Response ", response);
 
             const token = response.data.token;
             localStorage.setItem('jwtToken', token);

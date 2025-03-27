@@ -19,17 +19,18 @@ function Login() {
 
         try {
             const response = await axios.post(
-                'https://api.datavortex.nl/anilytics/users/authenticate',
+                'https://frontend-educational-backend.herokuapp.com/api/auth/signin',
                 { username, password },
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Api-Key': '',
+                        'X-Api-Key': 'anilytics:XZgYZxpjq6LTYAhvpWA9',
                     },
                 }
             );
+            console.log("Login response: ", response);
 
-            const token = response.data.jwt;
+            const token = response.data.accessToken;
             localStorage.setItem('jwtToken', token);
             login(token);
             setSuccess('Login successful!');

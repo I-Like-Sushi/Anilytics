@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-// This is just a placeholder that will hold the authentication-related state and functions.
 const AuthContext = createContext();
 
 export const useAuth = () => {

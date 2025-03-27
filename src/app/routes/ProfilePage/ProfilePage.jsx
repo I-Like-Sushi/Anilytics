@@ -18,35 +18,43 @@ function ProfilePage() {
     const [emailError, setEmailError] = useState(false);
 
     const token = localStorage.getItem('jwtToken');
+    console.log("Token: ", token);
 
     const fetchProfile = async () => {
         if (!token) return;
 
         const decodedToken = jwtDecode(token);
         const username = decodedToken.sub;
+        console.log("Decoded token: ", decodedToken);
+        console.log("Username: ", username);
 
         try {
             const userResponse = await axios.get(
-                `https://api.datavortex.nl/anilytics/users/${username}`,
+                `https://frontend-educational-backend.herokuapp.com/api/user/`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            console.log("User response: ", userResponse);
+
+            const userInfoResponse = await axios.get(
+                `https://frontend-educational-backend.herokuapp.com/api/user/`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
-            const userInfoResponse = await axios.get(
-                `https://api.datavortex.nl/anilytics/users/${username}/info`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            console.log("User info response: ", userInfoResponse);
 
             setProfile({
                 name: userResponse.data.username,
-                bio: userInfoResponse.data,
+                bio: userInfoResponse.data.info,
                 email: userResponse.data.email,
                 image: userResponse.data.image || blankProfilePicture,
             });
             setUpdatedProfile({
                 name: userResponse.data.username,
-                bio: userInfoResponse.data,
+                bio: userInfoResponse.data.info,
                 email: userResponse.data.email,
             });
+            console.log("Profile: ", profile);
+            console.log("setProfile: ", setProfile);
         } catch (error) {
             console.error('Error fetching profile:', error);
         }
@@ -83,11 +91,12 @@ function ProfilePage() {
 
         try {
             await axios.put(
-                `https://api.datavortex.nl/anilytics/users/${username}`,
+                `https://frontend-educational-backend.herokuapp.com/api/user/`,
                 {
                     name: updatedProfile.name,
                     email: updatedProfile.email,
-                    info: updatedProfile.bio, // Save "bio" as "info"
+                    info: updatedProfile.bio,
+                    image: updatedProfile.image,
                 },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
