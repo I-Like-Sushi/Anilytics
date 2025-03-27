@@ -13,11 +13,11 @@ function ProfilePage() {
         email: '',
         image: blankProfilePicture,
     });
-    const [isEditing, setIsEditing] = useState(false); // State for edit mode
-    const [updatedProfile, setUpdatedProfile] = useState({}); // Temp storage for edits
-    const [emailError, setEmailError] = useState(false); // Tracks if email is invalid
+    const [isEditing, setIsEditing] = useState(false);
+    const [updatedProfile, setUpdatedProfile] = useState({});
+    const [emailError, setEmailError] = useState(false);
 
-    const token = localStorage.getItem('jwtToken'); // Fetch token once
+    const token = localStorage.getItem('jwtToken');
 
     const fetchProfile = async () => {
         if (!token) return;
@@ -120,7 +120,7 @@ function ProfilePage() {
                             type="file"
                             className="image-button"
                             id="upload"
-                            onChange={() => {} /* Replace with custom logic */}
+                            onChange={() => {} /* */}
                         />
                     </div>
                     {isEditing ? (

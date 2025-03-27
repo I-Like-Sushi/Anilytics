@@ -30,8 +30,8 @@ function Login() {
             );
 
             const token = response.data.jwt;
-            localStorage.setItem('jwtToken', token); // Save JWT for future requests
-            login(token); // Update authentication context
+            localStorage.setItem('jwtToken', token);
+            login(token);
             setSuccess('Login successful!');
             setError('');
 

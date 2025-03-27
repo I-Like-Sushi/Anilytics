@@ -1,11 +1,7 @@
 import "./HeaderHome.css"
 import Searchbar from "./searchbar/Searchbar.jsx";
 
-
-
 function HeaderHome() {
-
-
 
     return (
         <header className="header">

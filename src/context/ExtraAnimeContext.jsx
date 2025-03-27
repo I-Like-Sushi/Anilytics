@@ -10,7 +10,6 @@ export function ExtraAnimeContextProvider({ children }) {
     const [error, setError] = useState(null);
 
     // Function to fetch data from the Anilist API (search results)
-// In ExtraAnimeContext.jsx, update fetchAnilistData to something like:
     const fetchAnilistData = async (idMal) => {
         setLoading(true);
         const graphqlQuery = `
@@ -59,7 +58,6 @@ export function ExtraAnimeContextProvider({ children }) {
 
     // Function to fetch data from the Kitsu API (search results)
     const fetchKitsuData = async (query) => {
-        console.log('CHECKING 22222222222');
         setLoading(true);
         setError(null);
         try {

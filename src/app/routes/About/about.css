@@ -41,16 +41,16 @@
 
 .responsive-container-block.Container {
     max-width: 1320px;
-    align-items: flex-start; /* Align items along the top */
-    justify-content: space-between; /* Space between left and right sides */
+    align-items: flex-start;
+    justify-content: space-between;
     display: flex;
-    flex-wrap: nowrap; /* Ensure items don’t wrap */
+    flex-wrap: nowrap;
     margin: 80px auto;
     padding: 10px 0;
 }
 
 .responsive-container-block.leftSide {
-    max-width: 600px; /* Optional: Limit max width */
+    max-width: 600px;
     padding: 10px;
     flex-direction: column;
     align-items: flex-start;
@@ -59,17 +59,17 @@
 }
 
 .responsive-container-block.rightSide {
-    width: 50%; /* Occupy the other half */
-    max-width: 600px; /* Optional: Limit max width */
+    width: 50%;
+    max-width: 600px;
     padding: 10px;
     display: flex;
-    justify-content: center; /* Center image horizontally */
-    align-items: center; /* Center image vertically */
+    justify-content: center;
+    align-items: center;
 }
 
 .responsive-container-block.rightSide img {
-    max-width: 100%; /* Ensure image fits within container */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 100%;
+    height: auto;
 }
 
 .text-blk.heading {
@@ -83,7 +83,7 @@
 .text-blk.btn {
     color: rgb(0, 178, 235);
     background-color: rgb(255, 255, 255);
-    box-shadow: rgba(160, 121, 0, 0.2) 0px 12px 35px;
+    box-shadow: rgba(160, 121, 0, 0.2) 0 12px 35px;
     border-radius: 100px;
     padding: 20px 50px;
     cursor: pointer;
@@ -127,7 +127,7 @@
 
 @media (max-width: 1024px) {
     .responsive-container-block.Container {
-        flex-direction: column-reverse; /* Stack items vertically */
+        flex-direction: column-reverse;
     }
 
     .text-blk.heading {

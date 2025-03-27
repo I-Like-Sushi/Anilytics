@@ -33,13 +33,11 @@ function CreateNewAccount() {
                 }
             );
 
-            // Assuming the API provides a token in the response
             const token = response.data.token;
-            localStorage.setItem('jwtToken', token); // Save token for validation
+            localStorage.setItem('jwtToken', token);
             setSuccess('Account created successfully!');
             setError('');
 
-            // Navigate to the ProfilePage.jsx
             window.location.href = '/ProfilePage';
         } catch (err) {
             console.error("Error creating account: ", err);

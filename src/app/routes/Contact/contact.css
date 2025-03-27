@@ -79,11 +79,11 @@
 
 .contact_us .responsive-container-block.Container {
     display: flex;
-    gap: 20px; /* spacing between sections */
+    gap: 20px;
     max-width: 1320px;
     margin: 50px auto;
-    justify-content: center; /* centers the flex children horizontally */
-    align-items: center; /* centers the flex children vertically (if needed) */
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -149,11 +149,11 @@
     text-align: center;
     background-color: #00b2eb;
     border-radius: 10px;
-    transition: background-color 0.3s ease-in-out; /* Smooth hover transition */
+    transition: background-color 0.3s ease-in-out;
 }
 
 .contact_us .submit:hover {
-    background-color: #0094c2; /* Add hover effect for the button */
+    background-color: #0094c2;
     cursor: pointer;
 }
 
@@ -179,7 +179,6 @@
     padding: 10px;
 }
 
-/* Responsive Styling */
 @media (max-width: 1024px) {
     .contact_us .firstRow {
         flex-direction: column;
@@ -197,12 +196,12 @@
 
 @media (max-width: 768px) {
     .contact_us .responsive-container-block.Container {
-        flex-direction: column; /* Stack elements vertically */
+        flex-direction: column;
     }
 
     .contact_us .responsive-cell-block.wk-desk-5,
     .contact_us .responsive-cell-block.wk-desk-7 {
-        flex: 0 0 100%; /* Make sections full width */
+        flex: 0 0 100%;
     }
 }
 

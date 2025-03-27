@@ -99,10 +99,10 @@
 
 .save-button:hover,
 .profile-button:hover {
-    background-color: #ff6f61; /* Vibrant coral background */
-    color: white; /* Ensures text is clear */
-    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.6); /* Soft coral glow */
-    transition: box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth glow animation */
+    background-color: #ff6f61;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.6);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .cancel-button {
@@ -116,9 +116,9 @@
 }
 
 .cancel-button:hover {
-    background-color: #C0392B; /* A slightly darker shade of red */
-    color: #fff; /* Keeps the text clean and readable */
-    box-shadow: 0 3px 10px rgba(192, 57, 43, 0.5); /* Adds a soft red glow */
+    background-color: #C0392B;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(192, 57, 43, 0.5);
 }
 
 .image-button {
