@@ -12,7 +12,6 @@ Nowadays, when you want to check the rating of an anime, there are plenty of web
 - [Usage](#usage)
 - [Features](#features)
 - [Screenshots](#screenshots)
-- [Contributing](#contributing)
 - [Contact](#contact)
 
 ---
@@ -71,14 +70,24 @@ npm install     # Install all dependencies
 npm run dev     # Start the development server
 ```
 
-Once the server starts, navigate to `http://localhost:3000` in your browser to access the application.
+Once the server starts, navigate to `http://localhost:5173/` in your browser to access the application.
 
 ### Example Screenshots
 ![Homepage Screenshot](./src/assets/screenshots/homepage.webp)
+![Details Screenshot](./src/assets/screenshots/detailsScreenshot.png)
 
 ## Features
 - Search for anime ratings across multiple platforms.
 - View detailed anime statistics and analytics in one place.
 - Interactive charts for visualizing anime popularity.
 - Mobile-friendly and responsive design.
-- Dark theme support for better viewing comfort.
+
+## Acknowledgements
+- **[Jikan API](https://jikan.moe/)**, **[Anilist API](https://docs.anilist.co/)** and **[Kitsu API](https://kitsu.docs.apiary.io/)**:  For their anime data and ratings.
+- **[React Modal](https://github.com/reactjs/react-modal):** For modal dialogs.
+- Special thanks to all contributors and beta users for their feedback.
+
+## Contact
+Feel free to reach me through:
+- Email: [Anilytics@outlook.com](mailto:Anilytics@outlook.com)
+- GitHub: [I-Like-Sushi](https://github.com/I-Like-Sushi)

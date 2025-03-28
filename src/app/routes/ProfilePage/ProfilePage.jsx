@@ -86,17 +86,13 @@ function ProfilePage() {
             return;
         }
 
-        const decodedToken = jwtDecode(token);
-        const username = decodedToken.sub;
-
         try {
             await axios.put(
-                `https://frontend-educational-backend.herokuapp.com/api/user/`,
+                `https://frontend-educational-backend.herokuapp.com/api/user`,
                 {
                     name: updatedProfile.name,
                     email: updatedProfile.email,
                     info: updatedProfile.bio,
-                    image: updatedProfile.image,
                 },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -105,6 +101,38 @@ function ProfilePage() {
             setIsEditing(false); // Exit edit mode
         } catch (error) {
             console.error('Error saving profile:', error);
+        }
+    };
+
+    const handleImageUpload = async (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = async () => {
+                const base64String = reader.result;
+
+                try {
+                    // API call to upload the image
+                    await axios.put(
+                        `https://frontend-educational-backend.herokuapp.com/api/user/image`,
+                        { image: base64String },
+                        { headers: { Authorization: `Bearer ${token}` } }
+                    );
+
+                    // Update the profile image in the state
+                    setProfile((prevProfile) => ({
+                        ...prevProfile,
+                        image: base64String,
+                    }));
+
+                    alert('Image uploaded successfully!');
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    alert('Failed to upload image. Please try again.');
+                }
+            };
+            reader.readAsDataURL(file);
         }
     };
 
@@ -125,18 +153,18 @@ function ProfilePage() {
                 <div className="profile-card">
                     <div className="profile-image">
                         <img src={profile.image} alt="Profile" className="profile-pic" />
-                        <input
-                            type="file"
-                            className="image-button"
-                            id="upload"
-                            onChange={() => {} /* */}
-                        />
                     </div>
                     {isEditing ? (
                         <>
-
-                            <label htmlFor="upload" className="custom-upload-button">
+                            <label className="custom-upload-button">
                                 Change Profile Picture
+                                <input
+                                    type="file"
+                                    className="image-button"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                    style={{ display: 'none' }} // Hide the input visually but keep it functional
+                                />
                             </label>
                             <h2 className="profile-name">{profile.name || "Loading name..."}</h2>
                             <p className="p-email">Bio:</p>
