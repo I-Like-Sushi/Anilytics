@@ -89,7 +89,6 @@ function Details() {
             if (response.ok) {
                 const json = await response.json();
                 setAnilistData(json.data);
-                console.log("MAL ID: ", id);
             } else {
                 console.error("Failed to fetch anime details from Anilist API.");
             }

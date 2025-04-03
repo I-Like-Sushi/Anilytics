@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import './ProfilePage.css';
 import Nav from '../../../components/Nav/Nav.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
@@ -18,29 +17,20 @@ function ProfilePage() {
     const [emailError, setEmailError] = useState(false);
 
     const token = localStorage.getItem('jwtToken');
-    console.log("Token: ", token);
 
     const fetchProfile = async () => {
         if (!token) return;
-
-        const decodedToken = jwtDecode(token);
-        const username = decodedToken.sub;
-        console.log("Decoded token: ", decodedToken);
-        console.log("Username: ", username);
-
         try {
             const userResponse = await axios.get(
                 `https://frontend-educational-backend.herokuapp.com/api/user/`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            console.log("User response: ", userResponse);
 
             const userInfoResponse = await axios.get(
                 `https://frontend-educational-backend.herokuapp.com/api/user/`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
-            console.log("User info response: ", userInfoResponse);
 
             setProfile({
                 name: userResponse.data.username,
@@ -53,8 +43,6 @@ function ProfilePage() {
                 bio: userInfoResponse.data.info,
                 email: userResponse.data.email,
             });
-            console.log("Profile: ", profile);
-            console.log("setProfile: ", setProfile);
         } catch (error) {
             console.error('Error fetching profile:', error);
         }
@@ -74,7 +62,6 @@ function ProfilePage() {
         const { name, value } = target;
         setUpdatedProfile({ ...updatedProfile, [name]: value });
 
-        // Validate email if the input name is "email"
         if (name === 'email') {
             setEmailError(!validateEmail(value));
         }
