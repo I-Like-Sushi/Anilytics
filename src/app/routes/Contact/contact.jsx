@@ -2,7 +2,7 @@ import './contact.css';
 import Nav from "../../../components/Nav/Nav.jsx";
 import Footer from "../../../components/Footer/Footer.jsx";
 import ShiroBako1 from "../../../assets/images/ShiroBako1.png";
-import ReusableModal from "../../ReusableModal.jsx";
+import ReusableModal from "../../../components/ReusableModal.jsx";
 import { useState } from "react";
 
 function Contact() {

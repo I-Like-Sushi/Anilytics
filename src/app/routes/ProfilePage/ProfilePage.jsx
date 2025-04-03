@@ -104,38 +104,6 @@ function ProfilePage() {
         }
     };
 
-    const handleImageUpload = async (event) => {
-        const file = event.target.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = async () => {
-                const base64String = reader.result;
-
-                try {
-                    // API call to upload the image
-                    await axios.put(
-                        `https://frontend-educational-backend.herokuapp.com/api/user/image`,
-                        { image: base64String },
-                        { headers: { Authorization: `Bearer ${token}` } }
-                    );
-
-                    // Update the profile image in the state
-                    setProfile((prevProfile) => ({
-                        ...prevProfile,
-                        image: base64String,
-                    }));
-
-                    alert('Image uploaded successfully!');
-                } catch (error) {
-                    console.error('Error uploading image:', error);
-                    alert('Failed to upload image. Please try again.');
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
     const handleCancel = () => {
         setIsEditing(false);
         setUpdatedProfile({
@@ -162,7 +130,6 @@ function ProfilePage() {
                                     type="file"
                                     className="image-button"
                                     accept="image/*"
-                                    onChange={handleImageUpload}
                                     style={{ display: 'none' }} // Hide the input visually but keep it functional
                                 />
                             </label>
