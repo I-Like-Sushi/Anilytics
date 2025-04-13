@@ -59,10 +59,6 @@ body {
     text-decoration: none;
 }
 
-.auth-button {
-    background: #0070f3;
-}
-
 .log-in-button:hover {
     background-color: #005bb5;
 }
