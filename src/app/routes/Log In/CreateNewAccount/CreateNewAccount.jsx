@@ -28,11 +28,9 @@ function CreateNewAccount() {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Api-Key': 'anilytics:XZgYZxpjq6LTYAhvpWA9',
                     },
                 }
             );
-            console.log("Response ", response);
 
             const token = response.data.token;
             localStorage.setItem('jwtToken', token);
@@ -41,7 +39,6 @@ function CreateNewAccount() {
 
             window.location.href = '/ProfilePage';
         } catch (err) {
-            console.error("Error creating account: ", err);
             setError(err.response?.data?.message || 'Failed to create account');
         }
     };

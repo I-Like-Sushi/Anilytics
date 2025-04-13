@@ -24,11 +24,9 @@ function Login() {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Api-Key': 'anilytics:XZgYZxpjq6LTYAhvpWA9',
                     },
                 }
             );
-            console.log("Login response: ", response);
 
             const token = response.data.accessToken;
             localStorage.setItem('jwtToken', token);
@@ -38,7 +36,6 @@ function Login() {
 
             navigate('/ProfilePage'); // Redirect to profile page
         } catch (err) {
-            console.error('Login error:', err);
             setError(err.response?.data?.message || 'Failed to log in');
             setSuccess('');
         }

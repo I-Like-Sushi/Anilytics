@@ -10,7 +10,8 @@ function About() {
     return (
         <>
             <Nav/>
-            <div className="responsive-container-block bigContainer">
+            <div className="about_wrapper">
+                <div className="responsive-container-block bigContainer">
                 <div className="responsive-container-block Container">
                     <div className="responsive-container-block leftSide">
                         <p className="text-blk heading">
@@ -83,6 +84,7 @@ function About() {
                              src={MaoMao1webp} alt="Image of Fate/Zero"/>
                     </div>
                 </div>
+            </div>
             </div>
             <Footer/>
         </>
