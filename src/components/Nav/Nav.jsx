@@ -12,12 +12,10 @@ function Nav() {
         setMenuOpen(!menuOpen);
     };
 
-
     const handleLogout = (e) => {
         e.preventDefault();
         logout();
     };
-
 
     return (
         <nav className="navbar">

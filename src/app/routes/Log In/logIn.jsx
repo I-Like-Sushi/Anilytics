@@ -33,7 +33,6 @@ function Login() {
             login(token);
             setSuccess('Login successful!');
             setError('');
-
             navigate('/ProfilePage'); // Redirect to profile page
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to log in');

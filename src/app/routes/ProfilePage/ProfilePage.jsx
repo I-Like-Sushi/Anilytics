@@ -30,7 +30,6 @@ function ProfilePage() {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
-
             setProfile({
                 name: userResponse.data.username,
                 bio: userInfoResponse.data.info,

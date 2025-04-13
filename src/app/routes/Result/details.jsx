@@ -143,7 +143,6 @@ function Details() {
         }
     }, [isMaljikanLoaded, isAnilistLoaded, isKitsuLoaded]);
 
-
     if (loading) {
         return (
             <>

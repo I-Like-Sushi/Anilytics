@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import PropTypes from "prop-types";
 
 const ReusableModal = ({
                            isOpen,
@@ -43,6 +44,14 @@ const ReusableModal = ({
             </div>
         </Modal>
     );
+};
+
+ReusableModal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    title: PropTypes.string,
+    children: PropTypes.node,
+    customStyles: PropTypes.object,
 };
 
 export default ReusableModal;
