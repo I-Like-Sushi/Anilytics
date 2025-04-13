@@ -15,7 +15,6 @@ function ProfilePage() {
     const [isEditing, setIsEditing] = useState(false);
     const [updatedProfile, setUpdatedProfile] = useState({});
     const [emailError, setEmailError] = useState(false);
-
     const token = localStorage.getItem('jwtToken');
 
     const fetchProfile = async () => {

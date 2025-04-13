@@ -13,6 +13,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
+            {/* path=/Anilytics/ has only been created for Github pages.*/}
             <Route path="/Anilytics" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />

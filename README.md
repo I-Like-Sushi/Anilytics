@@ -99,3 +99,11 @@ Feel free to reach me through:
 - Email: [Anilytics@outlook.com](mailto:Anilytics@outlook.com)
 - GitHub: [I-Like-Sushi](https://github.com/I-Like-Sushi)
 - Anilytics: [Repository](https://github.com/I-Like-Sushi/Anilytics)
+
+## Additional information
+
+Please note that within the vite.config.js file the following parameter has been added:
+```
+base: "/Anilytics/"
+```
+This is needed for the Github pages domain.
